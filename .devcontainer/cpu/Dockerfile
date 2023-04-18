@@ -23,5 +23,7 @@ RUN apt-get update \
     pandoc \
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
+USER vscode
+
 RUN pip install -U pip \
     && pip install black flake8 openfermion mypy pybind11-stubgen

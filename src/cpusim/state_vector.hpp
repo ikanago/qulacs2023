@@ -1,3 +1,1 @@
-class StateVector
-{
-};
+class StateVector {};

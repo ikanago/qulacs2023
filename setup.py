@@ -69,7 +69,7 @@ class CMakeBuild(build_ext):
             ["cmake", ext.sourcedir] + cmake_args, cwd=build_dir, env=env
         )
         subprocess.check_call(
-            ["cmake", "--build", ".", "--target", "python"] + build_args, cwd=build_dir
+            ["cmake", "--build", ".", "--target", "qulacs_core"] + build_args, cwd=build_dir
         )
 
     def _generate_args(self, ext):
