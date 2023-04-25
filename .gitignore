@@ -32,4 +32,5 @@
 *.app
 
 *.egg-info
+.vscode
 build

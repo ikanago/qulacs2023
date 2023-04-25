@@ -3,6 +3,6 @@ cmake_minimum_required(VERSION 3.0)
 add_library(core)
 
 target_sources(core PRIVATE
-    ops.cpp
+    init_fill.cpp
 )
 target_include_directories(core PRIVATE ${PROJECT_SOURCE_DIR}/src/core)

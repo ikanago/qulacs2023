@@ -37,7 +37,8 @@
 				"ms-vscode.cmake-tools",
 				"ms-python.python",
 				"ms-python.vscode-pylance",
-				"xaver.clang-format"
+				"xaver.clang-format",
+				"GitHub.copilot-nightly"
 			]
 		}
 	},
