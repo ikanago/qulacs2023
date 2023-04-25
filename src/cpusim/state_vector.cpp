@@ -3,7 +3,7 @@
 #include <cstdint>
 
 #include "../core/init_fill.hpp"
-#include "./exceptions.hpp"
+#include "exceptions.hpp"
 
 template <Runtime RUNTIME>
 StateVector<RUNTIME>::StateVector(std::uint64_t n_qubits)
@@ -13,14 +13,12 @@ StateVector<RUNTIME>::StateVector(std::uint64_t n_qubits)
 
 template <Runtime RUNTIME>
 StateVector<RUNTIME> StateVector<RUNTIME>::computational_basis(
-    std::uint64_t n_qubits, std::uint64_t basis
-) {
+    std::uint64_t n_qubits, std::uint64_t basis) {
     if (basis >= 1 << n_qubits) {
         throw MatrixIndexOutOfRangeException(
             "Error: QuantumStateCpu::set_computational_basis(ITYPE): "
             "index of "
-            "computational basis must be smaller than 2^qubit_count"
-        );
+            "computational basis must be smaller than 2^qubit_count");
     }
 
     StateVector<RUNTIME> state(n_qubits);

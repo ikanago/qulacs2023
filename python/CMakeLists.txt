@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.11)
 
 pybind11_add_module(qulacs_core SHARED EXCLUDE_FROM_ALL binding.cpp)
 target_include_directories(qulacs_core PRIVATE ${PROJECT_SOURCE_DIR}/src/core)

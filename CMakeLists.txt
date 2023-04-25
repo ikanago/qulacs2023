@@ -1,17 +1,19 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.11)
 
 project(qulacs)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-include(ExternalProject)
-include(${CMAKE_CURRENT_SOURCE_DIR}/cmake_script/FetchContent.cmake)
+include(FetchContent)
 
 ### Define variables ###
 if(NOT DEFINED USE_PYTHON)
     set(USE_PYTHON No)
 endif(NOT DEFINED USE_PYTHON)
+if(NOT DEFINED USE_TEST)
+    set(USE_TEST No)
+endif(NOT DEFINED USE_TEST)
 
 message(STATUS "USE_PYTHON = ${USE_PYTHON}")
 
@@ -31,5 +33,38 @@ if(USE_PYTHON)
     endif(NOT pybind11_fetch_POPULATED)
 endif(USE_PYTHON)
 
-add_subdirectory(python)
+# Google test
+if(USE_TEST)
+    FetchContent_Declare(
+        googletest_fetch
+        GIT_REPOSITORY https://github.com/google/googletest
+        GIT_TAG release-1.12.1
+    )
+    FetchContent_GetProperties(googletest_fetch)
+    if(NOT googletest_fetch_POPULATED)
+        message(STATUS "Fetch googletest for C++ testing")
+        FetchContent_Populate(googletest_fetch)
+        add_subdirectory(${googletest_fetch_SOURCE_DIR})
+    endif()
+else()
+    message(STATUS "Skip downloding googletest")
+endif(USE_TEST)
+
+### Add subdirectories ###
 add_subdirectory(src)
+if(USE_PYTHON)
+    add_subdirectory(python)
+endif(USE_PYTHON)
+if(USE_TEST)
+    add_subdirectory(tests)
+endif(USE_TEST)
+
+### Custom target ###
+# test
+if(USE_TEST)
+    add_custom_target(
+        test
+        DEPENDS cpusim_test
+        COMMAND cpusim_test
+    )
+endif(USE_TEST)
