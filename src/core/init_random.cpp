@@ -1,22 +1,22 @@
 #include "init_random.hpp"
 
-#include <cstdint>
 #include <vector>
 
 #include "random.hpp"
 
-std::vector<Complex> init_Haar_random_state(std::uint64_t n_qubits) {
+std::vector<Complex> init_Haar_random_state(UINT n_qubits) {
     Random rng;
-    std::vector<Complex> state(1ULL << n_qubits);
-    double norm_squared = 0.0;
-    for (std::uint64_t i = 0; i < (1ULL << n_qubits); ++i) {
+    const ITYPE dim = 1ULL << n_qubits;
+    std::vector<Complex> state(dim);
+    double norm = 0.0;
+    for (UINT i = 0; i < dim; ++i) {
         state[i] = Complex(rng.uniform(), rng.uniform());
-        norm_squared += std::pow(std::norm(state[i]), 2.0);
+        norm += std::norm(state[i]);
     }
 
-    const double norm = std::sqrt(norm_squared);
-    for (std::uint64_t i = 0; i < (1ULL << n_qubits); ++i) {
-        state[i] /= norm;
+    const auto norm_sqrt = std::sqrt(norm);
+    for (UINT i = 0; i < dim; ++i) {
+        state[i] /= norm_sqrt;
     }
     return state;
 }

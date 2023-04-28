@@ -1,14 +1,22 @@
 #include <gtest/gtest.h>
 
+#include <core/types.hpp>
 #include <cpusim/state_vector.hpp>
-#include <cpusim/types.hpp>
-#include <cstdint>
 
 #include "util.hpp"
 
+const double eps = 1e-12;
+
+TEST(StateTest, HaarRandomStateNorm) {
+    const UINT max_tries = 20;
+    for (UINT n = 1; n <= max_tries; n++) {
+        const auto state = StateVector<Runtime::CPU>::Haar_random_state(n);
+        ASSERT_NEAR(state.compute_squared_norm(), 1., eps);
+    }
+}
+
 TEST(StateVectorTest, AddState) {
     const uint64_t n = 10;
-    const double eps = 1e-12;
     auto state1 = StateVector<Runtime::CPU>::Haar_random_state(n);
     auto state2 = StateVector<Runtime::CPU>::Haar_random_state(n);
 

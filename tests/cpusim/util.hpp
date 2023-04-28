@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
+#include <core/types.hpp>
 #include <cpusim/state_vector.hpp>
-#include <cstdint>
 
 #define ASSERT_STATE_NEAR(state, other, eps) \
     ASSERT_PRED_FORMAT3(_assert_state_near, state, other, eps)
@@ -18,7 +18,7 @@ static testing::AssertionResult _assert_state_near(
                << "Dimension of " << state2_name << " is " << state2.dim << ".";
     }
 
-    for (int64_t i = 0; i < state1.dim; i++) {
+    for (ITYPE i = 0; i < state1.dim; i++) {
         const double real_diff =
             std::fabs(state1.amplitudes()[i].real() - state2.amplitudes()[i].real());
         if (real_diff > eps) {

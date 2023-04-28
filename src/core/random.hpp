@@ -1,5 +1,5 @@
 #pragma once
-#include <cstdint>
+
 #include <limits>
 #include <random>
 
@@ -43,7 +43,7 @@ public:
      *
      * @return 生成された乱数
      */
-    std::uint64_t int64() { return mt(); }
+    UINT int64() { return mt(); }
 
     /**
      * \~japanese-en 32bit整数の乱数を生成する

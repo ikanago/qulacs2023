@@ -1,6 +1,5 @@
 #pragma once
-#include <cpusim/types.hpp>
-#include <cstdint>
+#include <core/types.hpp>
 #include <vector>
 
-std::vector<Complex> init_zero_state(std::uint64_t n_qubits);
+std::vector<Complex> init_zero_state(UINT n_qubits);
