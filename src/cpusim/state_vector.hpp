@@ -10,20 +10,20 @@ template <Runtime RUNTIME>
 class StateVector {
     std::uint64_t n_qubits_;
     std::int64_t dim_;
-    std::vector<Complex> amplitudes;
+    std::vector<Complex> amplitudes_;
 
 public:
     StateVector(std::uint64_t n_qubits);
 
-    static StateVector computational_basis(
-        std::uint64_t n_qubits, std::uint64_t index
-    );
+    static StateVector computational_basis(std::uint64_t n_qubits, std::uint64_t index);
 
-    // static StateVector random_state(std::uint64_t n_qubits);
+    static StateVector Haar_random_state(std::uint64_t n_qubits);
 
     std::uint64_t n_qubits() const noexcept;
 
     std::int64_t dim() const noexcept;
+
+    const std::vector<Complex>& amplitudes() const noexcept;
 
     // double get_zero_probability() const;
 

@@ -7,7 +7,8 @@ add_executable(cpusim_test EXCLUDE_FROM_ALL
 )
 
 target_link_libraries(cpusim_test PRIVATE
+    core
     cpusim
     GTest::gtest_main
 )
-target_include_directories(cpusim_test PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
+target_include_directories(cpusim_test PRIVATE ${PROJECT_SOURCE_DIR}/src)
