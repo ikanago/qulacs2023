@@ -2,13 +2,11 @@
 #include <core/types.hpp>
 #include <vector>
 
-enum class Runtime { CPU };
-
 template <Runtime RUNTIME>
 class StateVector {
-    UINT n_qubits_;
-    ITYPE dim_;
-    std::vector<Complex> amplitudes_;
+    UINT _n_qubits;
+    ITYPE _dim;
+    std::vector<Complex> _amplitudes;
 
 public:
     StateVector(UINT n_qubits);
@@ -35,6 +33,8 @@ public:
     // double normalize();
 
     void add_state(const StateVector& state);
+
+    Complex& operator[](UINT index);
 };
 
 template class StateVector<Runtime::CPU>;

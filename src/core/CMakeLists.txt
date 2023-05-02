@@ -5,6 +5,8 @@ add_library(core)
 target_sources(core PRIVATE
     init_fill.cpp
     init_random.cpp
+    update_rx.cpp
+    update_x.cpp
     random.cpp
 )
 target_include_directories(core PRIVATE ${PROJECT_SOURCE_DIR}/src)
