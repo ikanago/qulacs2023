@@ -1,7 +1,30 @@
 #include <gtest/gtest.h>
 
+#include <Eigen/Core>
 #include <core/types.hpp>
 #include <cpusim/state_vector.hpp>
+
+static Eigen::MatrixXcd kronecker_product(
+    const Eigen::MatrixXcd& lhs, const Eigen::MatrixXcd& rhs
+) {
+    Eigen::MatrixXcd result(lhs.rows() * rhs.rows(), lhs.cols() * rhs.cols());
+    for (int i = 0; i < lhs.cols(); i++) {
+        for (int j = 0; j < lhs.rows(); j++) {
+            result.block(i * rhs.rows(), j * rhs.cols(), rhs.rows(), rhs.cols()) = lhs(i, j) * rhs;
+        }
+    }
+    return result;
+}
+
+static Eigen::MatrixXcd get_expanded_eigen_matrix_with_identity(
+    UINT target_qubit_index, const Eigen::MatrixXcd& one_qubit_matrix, UINT qubit_count
+) {
+    const ITYPE left_dim = 1ULL << target_qubit_index;
+    const ITYPE right_dim = 1ULL << (qubit_count - target_qubit_index - 1);
+    auto left_identity = Eigen::MatrixXcd::Identity(left_dim, left_dim);
+    auto right_identity = Eigen::MatrixXcd::Identity(right_dim, right_dim);
+    return kronecker_product(kronecker_product(right_identity, one_qubit_matrix), left_identity);
+}
 
 #define ASSERT_STATE_NEAR(state, other, eps) \
     ASSERT_PRED_FORMAT3(_assert_state_near, state, other, eps)
@@ -46,3 +69,14 @@ static testing::AssertionResult _assert_state_near(
 
     return testing::AssertionSuccess();
 }
+
+static Eigen::MatrixXcd make_2x2_matrix(
+    const Eigen::dcomplex a00, const Eigen::dcomplex a01, const Eigen::dcomplex a10,
+    const Eigen::dcomplex a11
+) {
+    Eigen::MatrixXcd m(2, 2);
+    m << a00, a01, a10, a11;
+    return m;
+}
+
+static Eigen::MatrixXcd make_X() { return make_2x2_matrix(0, 1, 1, 0); }

@@ -18,6 +18,19 @@ endif(NOT DEFINED USE_TEST)
 message(STATUS "USE_PYTHON = ${USE_PYTHON}")
 
 ### Fetch dependencies ###
+# Eigen
+FetchContent_Declare(
+    eigen_fetch
+    GIT_REPOSITORY https://gitlab.com/libeigen/eigen
+    GIT_TAG 3.4.0
+)
+FetchContent_GetProperties(eigen_fetch)
+if(NOT eigen_fetch_POPULATED)
+    message(STATUS "Fetch Eigen for matrix operation")
+    FetchContent_Populate(eigen_fetch)
+    add_subdirectory(${eigen_fetch_SOURCE_DIR})
+endif(NOT eigen_fetch_POPULATED)
+
 # pybind11
 if(USE_PYTHON)
     FetchContent_Declare(

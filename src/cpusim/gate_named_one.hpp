@@ -6,15 +6,17 @@
 #include "state_vector.hpp"
 
 template <Runtime RUNTIME>
-class X {
+class XGate {
     UINT _target;
 
 public:
+    XGate(UINT target) : _target(target) {}
+
     void update_quantum_state(StateVector<RUNTIME>& state) const { x_gate(this->_target, state); }
 };
 
 template <Runtime RUNTIME>
-class RX {
+class RXGate {
     UINT _target;
     double _angle;
 

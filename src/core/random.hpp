@@ -3,6 +3,8 @@
 #include <limits>
 #include <random>
 
+#include "types.hpp"
+
 class Random {
 private:
     std::uniform_real_distribution<double> uniform_dist;
