@@ -9,7 +9,7 @@ class StateVector {
     std::vector<Complex> _amplitudes;
 
 public:
-    StateVector(UINT n_qubits);
+    explicit StateVector(UINT n_qubits);
 
     static StateVector computational_basis(UINT n_qubits, UINT index);
 

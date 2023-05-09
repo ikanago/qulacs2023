@@ -28,10 +28,10 @@ TEST(StateVectorTest, AddState) {
 
     for (int64_t i = 0; i < dim; ++i) {
         ASSERT_NEAR(
-            state1.amplitudes()[i].real(), state_vector1[i].real() + state_vector2[i].real(), eps
+            state1[i].real(), state_vector1[i].real() + state_vector2[i].real(), eps
         );
         ASSERT_NEAR(
-            state1.amplitudes()[i].imag(), state_vector1[i].imag() + state_vector2[i].imag(), eps
+            state1[i].imag(), state_vector1[i].imag() + state_vector2[i].imag(), eps
         );
     }
 }

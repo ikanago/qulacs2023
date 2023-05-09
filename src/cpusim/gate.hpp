@@ -11,7 +11,7 @@ class QuantumGate {
     using GateKind = std::variant<XGate<RUNTIME>, RXGate<RUNTIME>>;
     GateKind _gate;
 
-    QuantumGate(const GateKind& gate) : _gate(gate) {}
+    explicit QuantumGate(const GateKind& gate) : _gate(gate) {}
 
 public:
     static QuantumGate X(UINT target) { return QuantumGate<RUNTIME>(XGate<RUNTIME>(target)); }
