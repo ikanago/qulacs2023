@@ -1,5 +1,5 @@
-#include "types.hpp"
-#include "update_ops.hpp"
+#include <core/types.hpp>
+#include <core/update_ops.hpp>
 
 // template <Runtime RUNTIME>
 void x_gate(UINT target_qubit_index, StateVector<Runtime::CPU>& state) {

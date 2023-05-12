@@ -1,8 +1,7 @@
 #include <cmath>
 #include <complex>
-
-#include "types.hpp"
-#include "update_ops.hpp"
+#include <core/types.hpp>
+#include <core/update_ops.hpp>
 
 void rx_gate(UINT target_qubit_index, double angle, StateVector<Runtime::CPU>& state) {
     const ITYPE loop_dim = state.dim() / 2;

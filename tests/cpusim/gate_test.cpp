@@ -1,10 +1,10 @@
 #include <gtest/gtest.h>
 
 #include <Eigen/Core>
+#include <core/gate.hpp>
 #include <core/random.hpp>
+#include <core/state_vector.hpp>
 #include <core/types.hpp>
-#include <cpusim/gate.hpp>
-#include <cpusim/state_vector.hpp>
 #include <functional>
 
 #include "util.hpp"

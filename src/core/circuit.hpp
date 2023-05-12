@@ -1,8 +1,9 @@
 #pragma once
 
-#include <core/types.hpp>
-#include <cpusim/gate.hpp>
 #include <vector>
+
+#include "gate.hpp"
+#include "types.hpp"
 
 template <Runtime RUNTIME>
 class QuantumCircuit {

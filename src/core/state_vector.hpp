@@ -1,6 +1,7 @@
 #pragma once
-#include <core/types.hpp>
 #include <vector>
+
+#include "types.hpp"
 
 template <Runtime RUNTIME>
 class StateVector {

@@ -1,8 +1,14 @@
-#include "init_random.hpp"
+#include "init.hpp"
 
+#include <core/random.hpp>
 #include <vector>
 
-#include "random.hpp"
+std::vector<Complex> init_zero_state(UINT n_qubits) {
+    UINT dim = 1 << n_qubits;
+    std::vector<Complex> amplitudes(dim, 0.0);
+    amplitudes[0] = 1.0;
+    return amplitudes;
+}
 
 std::vector<Complex> init_Haar_random_state(UINT n_qubits) {
     Random rng;

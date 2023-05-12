@@ -1,8 +1,8 @@
 #include <gtest/gtest.h>
 
 #include <Eigen/Core>
+#include <core/state_vector.hpp>
 #include <core/types.hpp>
-#include <cpusim/state_vector.hpp>
 
 static Eigen::MatrixXcd kronecker_product(
     const Eigen::MatrixXcd& lhs, const Eigen::MatrixXcd& rhs
@@ -31,8 +31,12 @@ static Eigen::MatrixXcd get_expanded_eigen_matrix_with_identity(
 
 template <Runtime RUNTIME>
 static testing::AssertionResult _assert_state_near(
-    const char* state1_name, const char* state2_name, const char* eps_name,
-    const StateVector<RUNTIME>& state1, const StateVector<RUNTIME>& state2, const double eps
+    const char* state1_name,
+    const char* state2_name,
+    const char* eps_name,
+    const StateVector<RUNTIME>& state1,
+    const StateVector<RUNTIME>& state2,
+    const double eps
 ) {
     if (state1.dim() != state2.dim()) {
         return testing::AssertionFailure()
@@ -71,7 +75,9 @@ static testing::AssertionResult _assert_state_near(
 }
 
 static Eigen::MatrixXcd make_2x2_matrix(
-    const Eigen::dcomplex a00, const Eigen::dcomplex a01, const Eigen::dcomplex a10,
+    const Eigen::dcomplex a00,
+    const Eigen::dcomplex a01,
+    const Eigen::dcomplex a10,
     const Eigen::dcomplex a11
 ) {
     Eigen::MatrixXcd m(2, 2);

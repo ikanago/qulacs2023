@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
+#include <core/state_vector.hpp>
 #include <core/types.hpp>
-#include <cpusim/state_vector.hpp>
 
 #include "util.hpp"
 
@@ -27,11 +27,7 @@ TEST(StateVectorTest, AddState) {
     state1.add_state(state2);
 
     for (int64_t i = 0; i < dim; ++i) {
-        ASSERT_NEAR(
-            state1[i].real(), state_vector1[i].real() + state_vector2[i].real(), eps
-        );
-        ASSERT_NEAR(
-            state1[i].imag(), state_vector1[i].imag() + state_vector2[i].imag(), eps
-        );
+        ASSERT_NEAR(state1[i].real(), state_vector1[i].real() + state_vector2[i].real(), eps);
+        ASSERT_NEAR(state1[i].imag(), state_vector1[i].imag() + state_vector2[i].imag(), eps);
     }
 }
