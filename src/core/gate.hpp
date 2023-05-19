@@ -4,19 +4,16 @@
 #include <variant>
 
 #include "gate_named_one.hpp"
-#include "state_vector.hpp"
+#include "quantum_state.hpp"
 
-template <Runtime RUNTIME>
 class QuantumGate {
-    using GateKind = std::variant<XGate<RUNTIME>, RXGate<RUNTIME>>;
+    using GateKind = std::variant<XGate, RXGate>;
     GateKind _gate;
 
     explicit QuantumGate(const GateKind& gate) : _gate(gate) {}
 
 public:
-    static QuantumGate X(UINT target) { return QuantumGate<RUNTIME>(XGate<RUNTIME>(target)); }
+    static QuantumGate X(UINT target) { return QuantumGate(XGate(target)); }
 
-    void update_quantum_state(StateVector<RUNTIME>& state) const;
+    void update_quantum_state(StateVectorCpu& state) const;
 };
-
-template class QuantumGate<Runtime::CPU>;

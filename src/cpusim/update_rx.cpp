@@ -3,7 +3,9 @@
 #include <core/types.hpp>
 #include <core/update_ops.hpp>
 
-void rx_gate(UINT target_qubit_index, double angle, StateVector<Runtime::CPU>& state) {
+#include "state_vector.hpp"
+
+void rx_gate(UINT target_qubit_index, double angle, StateVectorCpu& state) {
     const ITYPE loop_dim = state.dim() / 2;
     const ITYPE mask = (1ULL << target_qubit_index);
     const ITYPE mask_low = mask - 1;

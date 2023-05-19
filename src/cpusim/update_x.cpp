@@ -1,8 +1,10 @@
 #include <core/types.hpp>
 #include <core/update_ops.hpp>
 
+#include "state_vector.hpp"
+
 // template <Runtime RUNTIME>
-void x_gate(UINT target_qubit_index, StateVector<Runtime::CPU>& state) {
+void x_gate(UINT target_qubit_index, StateVectorCpu& state) {
     const ITYPE mask = (1ULL << target_qubit_index);
     const ITYPE mask_low = mask - 1;
     const ITYPE mask_high = ~mask_low;

@@ -37,5 +37,3 @@ public:
 
     Complex& operator[](UINT index);
 };
-
-template class StateVector<Runtime::CPU>;

@@ -5,23 +5,21 @@
 
 #include "state_vector.hpp"
 
-template <Runtime RUNTIME>
 class XGate {
     UINT _target;
 
 public:
     XGate(UINT target) : _target(target) {}
 
-    void update_quantum_state(StateVector<RUNTIME>& state) const { x_gate(this->_target, state); }
+    void update_quantum_state(StateVectorCpu& state) const { x_gate(this->_target, state); }
 };
 
-template <Runtime RUNTIME>
 class RXGate {
     UINT _target;
     double _angle;
 
 public:
-    void update_quantum_state(StateVector<RUNTIME>& state) const {
+    void update_quantum_state(StateVectorCpu& state) const {
         rx_gate(this->_target, this->_angle, state);
     }
 };

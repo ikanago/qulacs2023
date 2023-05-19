@@ -3,8 +3,8 @@
 #include <variant>
 
 #include "gate_named_one.hpp"
+#include "quantum_state.hpp"
 
-template <>
-void QuantumGate<Runtime::CPU>::update_quantum_state(StateVector<Runtime::CPU>& state) const {
+void QuantumGate::update_quantum_state(StateVectorCpu& state) const {
     std::visit([&](auto&& gate) { gate.update_quantum_state(state); }, this->_gate);
 }

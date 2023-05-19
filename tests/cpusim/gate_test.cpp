@@ -23,7 +23,7 @@ void run_random_gate_apply(
 
     Eigen::VectorXcd test_state = Eigen::VectorXcd::Zero(dim);
     for (UINT repeat = 0; repeat < 10; repeat++) {
-        auto state = StateVector<Runtime::CPU>::Haar_random_state(n_qubits);
+        auto state = StateVectorCpu::Haar_random_state(n_qubits);
         for (ITYPE i = 0; i < dim; i++) test_state[i] = state[i];
 
         const UINT target = random.int32() % n_qubits;
@@ -39,5 +39,5 @@ void run_random_gate_apply(
 }
 
 TEST(GateTest, ApplySingleQubitGate) {
-    run_random_gate_apply(5, QuantumGate<Runtime::CPU>::X, make_X);
+    run_random_gate_apply(5, QuantumGate::X, make_X);
 }
