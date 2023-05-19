@@ -3,8 +3,6 @@
 #include <core/types.hpp>
 #include <core/update_ops.hpp>
 
-#include "state_vector.hpp"
-
 class XGate {
     UINT _target;
 

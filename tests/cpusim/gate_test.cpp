@@ -3,8 +3,8 @@
 #include <Eigen/Core>
 #include <core/gate.hpp>
 #include <core/random.hpp>
-#include <core/state_vector.hpp>
 #include <core/types.hpp>
+#include <cpusim/state_vector.hpp>
 #include <functional>
 
 #include "util.hpp"
@@ -38,6 +38,4 @@ void run_random_gate_apply(
     }
 }
 
-TEST(GateTest, ApplySingleQubitGate) {
-    run_random_gate_apply(5, QuantumGate::X, make_X);
-}
+TEST(GateTest, ApplySingleQubitGate) { run_random_gate_apply(5, QuantumGate::X, make_X); }

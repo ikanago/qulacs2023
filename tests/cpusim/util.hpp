@@ -1,7 +1,6 @@
 #include <gtest/gtest.h>
 
 #include <Eigen/Core>
-#include <core/state_vector.hpp>
 #include <core/types.hpp>
 
 static Eigen::MatrixXcd kronecker_product(
@@ -34,18 +33,18 @@ static testing::AssertionResult _assert_state_near(
     const char* state1_name,
     const char* state2_name,
     const char* eps_name,
-    const StateVector<RUNTIME>& state1,
-    const StateVector<RUNTIME>& state2,
+    const QuantumStateBase& state1,
+    const QuantumStateBase& state2,
     const double eps
 ) {
     if (state1.dim() != state2.dim()) {
         return testing::AssertionFailure()
-               << "The dimension is different\nDimension of " << state1_name << " is " << state1.dim
-               << ",\n"
-               << "Dimension of " << state2_name << " is " << state2.dim << ".";
+               << "The dimension is different\nDimension of " << state1_name << " is "
+               << state1.dim() << ",\n"
+               << "Dimension of " << state2_name << " is " << state2.dim() << ".";
     }
 
-    for (ITYPE i = 0; i < state1.dim; i++) {
+    for (ITYPE i = 0; i < state1.dim(); i++) {
         const double real_diff =
             std::fabs(state1.amplitudes()[i].real() - state2.amplitudes()[i].real());
         if (real_diff > eps) {

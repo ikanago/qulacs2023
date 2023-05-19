@@ -1,7 +1,6 @@
 #include "state_vector.hpp"
 
 #include <core/exceptions.hpp>
-#include <core/state_vector.hpp>
 #include <core/types.hpp>
 #include <type_traits>
 
