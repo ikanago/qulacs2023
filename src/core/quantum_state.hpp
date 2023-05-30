@@ -5,12 +5,12 @@
 #include "types.hpp"
 
 template <class DERIVED>
-class QuantumStateBase {
-    // Prevent inheritance like `class Derived : public QuantumStateBase<Fake>`.
+class QuantumState {
+    // Prevent inheritance like `class Derived : public QuantumState<Fake>`.
     // When a class deriving this class is instantiated, this constructor is called.
-    // If the derived class is not a subclass of QuantumStateBase, the derived class cannot access
+    // If the derived class is not a subclass of QuantumState, the derived class cannot access
     // this constructor because it can only be accessed by DERIVED and compilation fails.
-    QuantumStateBase() = default;
+    QuantumState() = default;
     friend DERIVED;
 
 public:

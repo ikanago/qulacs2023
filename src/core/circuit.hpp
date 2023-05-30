@@ -20,7 +20,7 @@ public:
         this->_gates.push_back(XGate<S>(target));
     }
 
-    void update_quantum_state(QuantumStateBase<S>& state) const {
+    void update_quantum_state(QuantumState<S>& state) const {
         for (const auto& gate : this->_gates) {
             std::visit([&](auto&& gate) { gate.update_quantum_state(state); }, this->_gate);
         }

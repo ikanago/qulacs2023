@@ -92,7 +92,6 @@ public:
 
 ### Dynamic Dispatch(Normal Inheritance with Pure Virtual Class)
 - Pros:
-    - `Gate` を実装していれば，`Circuit` に追加できる
     - CRTP を使った実装よりはシンプルになる
 - Cons:
     - 実行時のオーバーヘッドがある

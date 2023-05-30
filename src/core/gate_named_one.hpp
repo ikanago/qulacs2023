@@ -12,7 +12,7 @@ class XGate : public QuantumGate<XGate<S>, S> {
 public:
     explicit XGate(UINT target) : _target(target) {}
 
-    void update_quantum_state(QuantumStateBase<S>& state) const override {
+    void update_quantum_state(QuantumState<S>& state) const override {
         S& state_derived = static_cast<S&>(state);
         x_gate(this->_target, state_derived);
     }

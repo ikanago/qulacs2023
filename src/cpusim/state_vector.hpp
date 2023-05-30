@@ -3,7 +3,7 @@
 #include <core/quantum_state.hpp>
 #include <core/types.hpp>
 
-class StateVectorCpu : public QuantumStateBase<StateVectorCpu> {
+class StateVectorCpu : public QuantumState<StateVectorCpu> {
     UINT _n_qubits;
     ITYPE _dim;
     std::vector<Complex> _amplitudes;

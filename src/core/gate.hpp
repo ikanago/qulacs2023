@@ -5,8 +5,11 @@
 
 #include "quantum_state.hpp"
 
-template <class T, class S>
+template <class DERIVED, class S>
 class QuantumGate {
+    QuantumGate() = default;
+    friend DERIVED;
+
 public:
-    virtual void update_quantum_state(QuantumStateBase<S>& state) const = 0;
+    virtual void update_quantum_state(QuantumState<S>& state) const = 0;
 };
