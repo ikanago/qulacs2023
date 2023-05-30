@@ -3,13 +3,19 @@
 #include <core/types.hpp>
 #include <core/update_ops.hpp>
 
-class XGate {
+#include "gate.hpp"
+
+template <class S>
+class XGate : public QuantumGate<XGate<S>, S> {
     UINT _target;
 
 public:
-    XGate(UINT target) : _target(target) {}
+    explicit XGate(UINT target) : _target(target) {}
 
-    void update_quantum_state(StateVectorCpu& state) const { x_gate(this->_target, state); }
+    void update_quantum_state(QuantumStateBase<S>& state) const override {
+        S& state_derived = static_cast<S&>(state);
+        x_gate(this->_target, state_derived);
+    }
 };
 
 class RXGate {

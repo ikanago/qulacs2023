@@ -3,7 +3,7 @@
 #include <core/quantum_state.hpp>
 #include <core/types.hpp>
 
-class StateVectorCpu : public QuantumStateBase {
+class StateVectorCpu : public QuantumStateBase<StateVectorCpu> {
     UINT _n_qubits;
     ITYPE _dim;
     std::vector<Complex> _amplitudes;
@@ -25,5 +25,5 @@ public:
 
     Complex& operator[](UINT index) override;
 
-    StateVectorCpu& operator+=(const StateVectorCpu& state);
+    StateVectorCpu& operator+=(const StateVectorCpu& state) override;
 };

@@ -3,19 +3,26 @@
 #include <vector>
 
 #include "gate.hpp"
+#include "gate_named_one.hpp"
 #include "types.hpp"
 
-template <Runtime RUNTIME>
+template <class S>
 class QuantumCircuit {
+    using GateKind = std::variant<XGate<S>>;
+
     UINT _n_qubits;
-    std::vector<QuantumGate<RUNTIME>> _gates;
+    std::vector<GateKind> _gates;
 
 public:
     explicit QuantumCircuit(UINT n_qubits) : _n_qubits(n_qubits) {}
 
-    void add_gate(const QuantumGate<RUNTIME>& gate) { this->_gates.push_back(gate); }
+    void X(UINT target) {
+        this->_gates.push_back(XGate<S>(target));
+    }
 
-    void update_quantum_state(StateVector<RUNTIME>& state) const {
-        for (const auto& gate : this->_gates) gate.update_quantum_state(state);
+    void update_quantum_state(QuantumStateBase<S>& state) const {
+        for (const auto& gate : this->_gates) {
+            std::visit([&](auto&& gate) { gate.update_quantum_state(state); }, this->_gate);
+        }
     }
 };

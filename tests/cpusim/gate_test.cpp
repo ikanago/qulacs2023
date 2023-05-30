@@ -2,6 +2,7 @@
 
 #include <Eigen/Core>
 #include <core/gate.hpp>
+#include <core/gate_named_one.hpp>
 #include <core/random.hpp>
 #include <core/types.hpp>
 #include <cpusim/state_vector.hpp>
@@ -12,11 +13,7 @@
 const auto eps = 1e-12;
 
 template <class QuantumGateConstructor>
-void run_random_gate_apply(
-    UINT n_qubits,
-    QuantumGateConstructor constructor,
-    std::function<Eigen::MatrixXcd()> matrix_factory
-) {
+void run_random_gate_apply(UINT n_qubits, std::function<Eigen::MatrixXcd()> matrix_factory) {
     const auto matrix = matrix_factory();
     const ITYPE dim = 1ULL << n_qubits;
     Random random;
@@ -27,7 +24,7 @@ void run_random_gate_apply(
         for (ITYPE i = 0; i < dim; i++) test_state[i] = state[i];
 
         const UINT target = random.int32() % n_qubits;
-        auto gate = constructor(target);
+        const QuantumGateConstructor gate(target);
         gate.update_quantum_state(state);
 
         test_state = get_expanded_eigen_matrix_with_identity(target, matrix, n_qubits) * test_state;
@@ -38,4 +35,4 @@ void run_random_gate_apply(
     }
 }
 
-TEST(GateTest, ApplySingleQubitGate) { run_random_gate_apply(5, QuantumGate::X, make_X); }
+TEST(GateTest, ApplySingleQubitGate) { run_random_gate_apply<XGate<StateVectorCpu>>(5, make_X); }

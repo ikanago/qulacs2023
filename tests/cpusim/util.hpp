@@ -28,13 +28,13 @@ static Eigen::MatrixXcd get_expanded_eigen_matrix_with_identity(
 #define ASSERT_STATE_NEAR(state, other, eps) \
     ASSERT_PRED_FORMAT3(_assert_state_near, state, other, eps)
 
-template <Runtime RUNTIME>
+template <Runtime RUNTIME, class T>
 static testing::AssertionResult _assert_state_near(
     const char* state1_name,
     const char* state2_name,
     const char* eps_name,
-    const QuantumStateBase& state1,
-    const QuantumStateBase& state2,
+    const QuantumStateBase<T>& state1,
+    const QuantumStateBase<T>& state2,
     const double eps
 ) {
     if (state1.dim() != state2.dim()) {

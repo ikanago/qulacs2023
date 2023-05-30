@@ -59,4 +59,5 @@ StateVectorCpu& StateVectorCpu::operator+=(const StateVectorCpu& state) {
     for (ITYPE i = 0; i < this->_dim; i++) {
         this->_amplitudes[i] += state.amplitudes()[i];
     }
+    return *this;
 }

@@ -4,7 +4,15 @@
 
 #include "types.hpp"
 
+template <class DERIVED>
 class QuantumStateBase {
+    // Prevent inheritance like `class Derived : public QuantumStateBase<Fake>`.
+    // When a class deriving this class is instantiated, this constructor is called.
+    // If the derived class is not a subclass of QuantumStateBase, the derived class cannot access
+    // this constructor because it can only be accessed by DERIVED and compilation fails.
+    QuantumStateBase() = default;
+    friend DERIVED;
+
 public:
     virtual UINT n_qubits() const noexcept = 0;
 
@@ -24,4 +32,6 @@ public:
     // double normalize();
 
     virtual Complex& operator[](UINT index) = 0;
+
+    virtual DERIVED& operator+=(const DERIVED& state) = 0;
 };
